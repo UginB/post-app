@@ -4,7 +4,7 @@ import './post-add-form.css'
 
 const PostAddForm = () => {
     return (
-        <form className="botto-panel d-flex">
+        <form className="bottom-panel d-flex">
             <input
                 type="text"
                 placeholder="О чем вы думаете сейчас?"
