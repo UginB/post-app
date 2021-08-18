@@ -27,8 +27,9 @@ export default class App extends Component {
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.addItem = this.addItem.bind(this);
-        this.onToggleImportant = this.onToggleImportant.bind(this);
-        this.onToggleLiked = this.onToggleLiked.bind(this);
+        // this.onToggleImportant = this.onToggleImportant.bind(this);
+        // this.onToggleLiked = this.onToggleLiked.bind(this);
+        this.onToggleAttr = this.onToggleAttr.bind(this);
         this.onUpdateSearch = this.onUpdateSearch.bind(this);
         this.onFilterSelect = this.onFilterSelect.bind(this);
 
@@ -62,27 +63,42 @@ export default class App extends Component {
         });
     }
 
-    onToggleImportant(id) {
+    // onToggleImportant(id) {
+    //     this.setState(({data}) => {
+    //         const index = data.findIndex(elem => elem.id === id);
+    //         const old = data[index];
+    //         const newItem = {...old, important: !old.important};
+    //         const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+
+    //         return {
+    //             data: newArr
+    //         }
+    //     });
+    // }
+
+    // onToggleLiked(id) {
+    //     this.setState(({data}) => {
+    //         const index = data.findIndex(elem => elem.id === id);
+
+    //         const old = data[index];
+    //         const newItem = {...old, like: !old.like};
+    //         const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+
+    //         return {
+    //             data: newArr
+    //         }
+    //     });
+    // }
+
+    onToggleAttr(id, attr) {
         this.setState(({data}) => {
             const index = data.findIndex(elem => elem.id === id);
             const old = data[index];
-            const newItem = {...old, important: !old.important};
+            let newItem;
+
+            (attr === 'like') ? newItem = {...old, like: !old.like} : newItem = {...old, important: !old.important}
+
             const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-
-            return {
-                data: newArr
-            }
-        });
-    }
-
-    onToggleLiked(id) {
-        this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-
-            const old = data[index];
-            const newItem = {...old, like: !old.like};
-            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-
             return {
                 data: newArr
             }
@@ -138,8 +154,8 @@ export default class App extends Component {
                 <PostList 
                     posts={visiblePosts}
                     onDelete={this.deleteItem}
-                    onToggleImportant={this.onToggleImportant}
-                    onToggleLiked={this.onToggleLiked}/>
+                    onToggleImportant={this.onToggleAttr}
+                    onToggleLiked={this.onToggleAttr}/>
                 <PostAddForm
                 onAdd={this.addItem}/>
             </AppBlock>
